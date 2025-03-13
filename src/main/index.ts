@@ -2,6 +2,25 @@ import { app, shell, BrowserWindow, ipcMain } from 'electron'
 import { join } from 'path'
 import { electronApp, optimizer, is } from '@electron-toolkit/utils'
 import icon from '../../resources/icon.png?asset'
+import { Menu, MenuItem } from 'electron/main'
+
+const menu = new Menu()
+menu.append(
+  new MenuItem({
+    label: 'Electron',
+    submenu: [
+      {
+        role: 'help',
+        accelerator: process.platform === 'darwin' ? 'Alt+Cmd+I' : 'Alt+Shift+I',
+        click: () => {
+          console.log('Electron rocks!')
+        }
+      }
+    ]
+  })
+)
+
+Menu.setApplicationMenu(menu)
 
 function createWindow(): void {
   // Create the browser window.
